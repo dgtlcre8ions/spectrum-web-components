@@ -72,6 +72,7 @@ export class OverlayTrigger extends LitElement {
             <div
                 id="trigger"
                 @click=${this.onTrigger}
+                @keypress=${this.onKeypress}
                 @mouseenter=${this.onTrigger}
                 @mouseleave=${this.onTrigger}
             >
@@ -122,21 +123,32 @@ export class OverlayTrigger extends LitElement {
         };
     }
 
+    private interacting = false;
+
+    private onKeypress(event: KeyboardEvent & { target: Element }): void {
+        const { target, code } = event;
+        if (code === 'Space' || code === 'Enter') {
+            target.dispatchEvent(new Event('click'));
+        }
+    }
+
     private onTrigger(event: Event): void {
-        if (this.disabled) {
+        if (this.disabled || this.interacting) {
             return;
         }
+        this.interacting = true;
         switch (event.type) {
             case 'click':
                 this.onTriggerClick();
-                return;
+                break;
             case 'mouseenter':
                 this.onTriggerMouseEnter();
-                return;
+                break;
             case 'mouseleave':
                 this.onTriggerMouseLeave();
-                return;
+                break;
         }
+        setTimeout(() => (this.interacting = false));
     }
 
     public async onTriggerClick(): Promise<void> {

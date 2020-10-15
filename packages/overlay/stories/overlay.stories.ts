@@ -177,7 +177,7 @@ export const inline = (): TemplateResult => {
         </p>
         <p>
             This is a
-            <a href="#">link</a>
+            <a href="#anchor">link</a>
             .
         </p>
     `;
@@ -206,7 +206,7 @@ export const replace = (): TemplateResult => {
         </p>
         <p>
             This is a
-            <a href="#">link</a>
+            <a href="#anchor">link</a>
             .
         </p>
     `;
@@ -256,7 +256,7 @@ export const modal = (): TemplateResult => {
         </p>
         <p>
             This is a
-            <a href="#">link</a>
+            <a href="#anchor">link</a>
             .
         </p>
     `;
